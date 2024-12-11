@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+   font-family: "Darwin Pro";
+   src: url("./assets/fonts/Los\ Andes\ Type\ \ Darwin\ Pro\ Regular.woff"),
+      url("./assets/fonts/Los\ Andes\ Type\ \ Darwin\ Pro\ Bold.woff"), ;
+}
+
+body {
+   font-family: "Darwin Pro", Arial, Helvetica, sans-serif;
+}
