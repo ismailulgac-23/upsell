@@ -2,10 +2,14 @@ import service from "axios";
 
 export const API_URL = "http://localhost:3000";
 
+export const getImage = (src) => {
+   return `${API_URL}/uploads/${src}`
+}
+
 const axios = service.create({
-   baseURL: `${API_URL}/api`,
+   baseURL: API_URL,
    headers: {
-      Authorization: localStorage.getItem('token') || null
+      token: localStorage.getItem('token') || null
    }
 });
 

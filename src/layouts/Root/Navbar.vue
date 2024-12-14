@@ -1,33 +1,23 @@
 <template>
-   <div class="w-full h-[80px] border-b-2 border-b-primary">
-      <div class="container mx-auto h-full flex items-center justify-between">
-         <router-link to="/" class="flex items-center gap-3">
-            <img :src="getImage('user', store.introduction.photoUrl)" class="w-[32px] h-[32px] rounded-lg" />
-            <h1 class="text-base font-semibold">{{ store.introduction.fullName }}</h1>
-         </router-link>
-
-         <div class="flex items-center gap-8">
-            <a v-for="(category, index) in store.categoryAndPosts" :key="index" 
-            @click="handleClickLink(category.id)"
-               class="text-base font-normal cursor-pointer">
-               {{category.title}}
-            </a>
-         </div>
-
-         <div></div>
-      </div>
+   <div class="p-6 w-full flex items-center gap-8 border-b border-b-dark-800">
+      <router-link v-for="(link, index) in links" :key="index" :to="link.to" :class="['text-lg', {
+         'text-white font-semibold': route.fullPath == link.to,
+         'text-dark-400 font-normal': route.fullPath != link.to
+      }]">
+         {{ link.title }}
+      </router-link>
    </div>
 </template>
 
 <script setup>
-import { Icon } from "@iconify/vue";
-import { getImage } from "../../helpers";
-import { store } from "../../store";
+import { useRoute } from 'vue-router';
 
-const handleClickLink = (id) => {
-   window.location.href = `/#${id}`;
-   window.location.reload();
-}
+const route = useRoute();
+const links = [
+   { title: "Keşfet", to: "/" },
+   { title: "Canlı Yayınlar", to: "/live" },
+   { title: "Sohbet Odaları", to: "/live/" },
+]
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,10 +1,10 @@
 <template>
-   <div v-if="!loading">
-      <Navbar />
-      <div class="py-14 container mx-auto max-w-6xl">
+   <div v-if="!loading" class="relative flex items-start container w-[1450px]">
+      <Sidebar />
+      <div class="fixed left-[560px] w-[720px] overflow-y-auto h-full no-scrollbar">
          <router-view></router-view>
       </div>
-      <Footer/>
+      <Rightbar />
    </div>
    <div v-else class="w-screen h-screen flex items-center justify-center overflow-hidden">
       <h1 class="text-4xl font-medium">Hoşgeldiniz</h1>
@@ -14,14 +14,13 @@
 <script setup>
 
 import { onMounted, ref } from 'vue';
-import Footer from './Footer.vue';
 import Navbar from './Navbar.vue';
-import { store } from '../../store';
+import Sidebar from './Sidebar.vue';
+import Rightbar from './Rightbar/index.vue';
 
 const loading = ref(true);
 
 onMounted(async () => {
-   await store.fetchIntroduction();
    loading.value = false;
 });
 

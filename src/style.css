@@ -1,13 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-   font-family: "Darwin Pro";
-   src: url("./assets/fonts/Los\ Andes\ Type\ \ Darwin\ Pro\ Regular.woff"),
-      url("./assets/fonts/Los\ Andes\ Type\ \ Darwin\ Pro\ Bold.woff"), ;
+body {
+  font-family: "Poppins", sans-serif;
+  @apply bg-dark-900 text-white;
 }
 
-body {
-   font-family: "Darwin Pro", Arial, Helvetica, sans-serif;
+.btn-primary {
+  background: linear-gradient(0deg, #d33857 0%, #e6607f 100%);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.gift {
+  background: linear-gradient(90deg,
+      rgba(211, 56, 87, 0.6) 64.29%,
+      rgba(211, 56, 87, 0) 100%);
+}
+
+.bg-to-text {
+  background: linear-gradient(90deg,
+      rgba(211, 56, 87, 0.6) 100%,
+      rgba(211, 56, 87, 0) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

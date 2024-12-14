@@ -24,3 +24,23 @@ export const formatDate = (dateString) => {
 
    return [formattedDate, formattedTime];
 }
+
+export const GENDERS = {
+   MALE: "Erkek",
+   FEMALE: "Kadın",
+}
+
+export const getAgeFromDate = (payload) => {
+   const birthDate = new Date(payload);
+   const today = new Date();
+   let age = today.getFullYear() - birthDate.getFullYear();
+
+   if (
+      today.getMonth() < birthDate.getMonth() ||
+      (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
+   ) {
+      age--;
+   }
+
+   return age.toString();
+}
