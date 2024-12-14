@@ -59,7 +59,7 @@ router.beforeEach(async (to, from, next) => {
       }
 
       if (!userStore.user) {
-         if (to.path !== '/login' && to.path !== '/register') {
+         if (to.path !== '/login' && to.path !== '/register' && to.path !== '/logout') {
             next('/login');
          } else {
             next();

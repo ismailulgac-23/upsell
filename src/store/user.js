@@ -1,5 +1,6 @@
 import { reactive } from 'vue';
 import axios from '../axios';
+import router from '../router';
 
 export const userStore = reactive({
    user: null,
@@ -11,5 +12,12 @@ export const userStore = reactive({
       } catch (error) {
          
       }
+   },
+   logout() {
+      localStorage.removeItem('token');
+      setTimeout(() => {
+         this.user = null;
+      }, 2000);
+      window.location.href = "/login";
    }
 });

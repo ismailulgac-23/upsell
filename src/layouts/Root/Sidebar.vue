@@ -7,10 +7,10 @@
          </router-link>
 
          <div class="flex flex-col items-start gap-10">
-            <router-link :to="link.to" v-for="(link, index) in links" :key="index" class="flex items-center gap-3">
+            <component :is="link.to ? 'router-link' : 'button'" @click="link.onClick" :to="link.to" v-for="(link, index) in links" :key="index" class="flex items-center gap-3">
                <Icon :icon="link.icon" class="text-3xl" />
                <h1>{{ link.title }}</h1>
-            </router-link>
+            </component>
          </div>
       </div>
 
@@ -45,6 +45,7 @@ const links = [
    { title: "Mesajlar", icon: "mynaui:chat-messages" },
    { title: "Bildirimler", icon: "solar:bell-outline" },
    { title: "Profilim", icon: "iconoir:profile-circle", to: `/user/${userStore.user.id}` },
+   { title: "Çıkış Yap", icon: "mdi:logout", onClick: () => userStore.logout() },
 ];
 </script>
 

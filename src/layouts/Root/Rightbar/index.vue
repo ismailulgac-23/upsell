@@ -8,7 +8,7 @@
 
       <Loading v-if="state.loading" />
       <div v-else class="flex flex-col items-start w-full gap-4">
-         <User v-for="user in state.users" :key="user.id" :user="user" />
+         <User @onLikeUser="onLikeUser" v-for="user in state.users" :key="user.id" :user="user" />
       </div>
    </div>
 </template>
@@ -29,6 +29,11 @@ const state = reactive({
    loading: false,
    query: ""
 });
+
+const onLikeUser = (id) => {
+   state.users = state.users.filter((e) => e.id !== id);
+   fetchRandomUsers();
+}
 
 const fetchRandomUsers = async () => {
    try {
