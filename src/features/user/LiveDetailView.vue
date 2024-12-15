@@ -101,12 +101,12 @@
 <script setup>
 import { Icon } from "@iconify/vue/dist/iconify.js";
 import { onBeforeUnmount, onMounted, reactive, ref } from "vue";
-import axios, { getImage } from "../../axios";
+import axios, { API_URL, getImage } from "../../axios";
 import Loading from "../../components/common/Loading.vue";
 import { createClient } from "agora-rtc-sdk-ng/esm";
 import { useRoute } from "vue-router";
 import { useToast } from "vue-toast-notification";
-
+import { io } from "socket.io-client";
 
 const route = useRoute();
 
@@ -124,8 +124,10 @@ const remoteVideoRef = ref(null);
 
 const state = reactive({
    live: {},
-   loading: false
+   loading: false,
+   socket: io(API_URL, {autoConnect: true,secure: false})
 });
+
 
 const fetchLive = async () => {
    state.loading = true;

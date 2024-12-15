@@ -1,7 +1,7 @@
 import service from "axios";
 
 /* export const API_URL = "http://localhost:3000"; */
-export const API_URL = "http://49.12.77.244:3000";
+export const API_URL = "https://api.lovmeet.com";
 
 export const getImage = (src) => {
    return `${API_URL}/uploads/${src}`
