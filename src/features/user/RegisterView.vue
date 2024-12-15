@@ -4,14 +4,14 @@
          <img src="/register.png" class="w-full h-full object-cover" />
       </div>
       <div class="relative w-full md:w-1/2 h-full">
-         <PhoneNumber v-if="state.currentStepIndex == 0" :onSubmit="onSubmit" :setCode="setCode"
+         <PhoneNumber v-if="userStore.registerStep == 0" :onSubmit="onSubmit" :setCode="setCode"
             :onVerifyOTP="onVerifyOTP" :verifyLoading="state.verifyLoading" />
-         <PersonalInformation v-if="state.currentStepIndex == 1" :setCredentials="setPersonalInformation" />
-         <Hobbies v-if="state.currentStepIndex == 2" :setCredentials="(payload) => {
-            state.currentStepIndex += 1;
+         <PersonalInformation v-if="userStore.registerStep == 1" :setCredentials="setPersonalInformation" />
+         <Hobbies v-if="userStore.registerStep == 2" :setCredentials="(payload) => {
+            userStore.registerStep += 1;
             setCredentials(payload);
          }" />
-         <Reason v-if="state.currentStepIndex == 3" :onComplete="onComplete" />
+         <Reason v-if="userStore.registerStep == 3" :onComplete="onComplete" />
       </div>
    </div>
 </template>
@@ -19,7 +19,7 @@
 <script setup>
 import { modalStore } from '../../store/modal';
 import axios from '../../axios';
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import { userStore } from '../../store/user';
 import { useRouter } from 'vue-router';
@@ -33,7 +33,6 @@ const $toast = useToast();
 const router = useRouter();
 
 const state = reactive({
-   currentStepIndex: 0,
    code: "",
    verifyLoading: false,
    credentials: {}
@@ -51,7 +50,7 @@ const setCode = (payload) => {
 }
 
 const setPersonalInformation = (payload) => {
-   state.currentStepIndex +=1;
+   userStore.registerStep +=1;
    setCredentials({
       fullName: payload.fullName,
       gender: payload.gender,
@@ -91,7 +90,7 @@ const onVerifyOTP = async ({ phoneNumber }) => {
       if (error.response.data.message != 'REGISTER') {
          $toast.error(error.response.data.message, { position: "top" });
       } else {
-         state.currentStepIndex += 1;
+         userStore.registerStep += 1;
       }
    } finally {
       setCredentials({ phoneNumber });
@@ -114,6 +113,10 @@ const onComplete = async ({ reason }) => {
    }
 
 }
+
+onMounted(() => {
+   setCredentials({ phoneNumber: userStore.registerPhoneNumber });
+});
 
 </script>
 

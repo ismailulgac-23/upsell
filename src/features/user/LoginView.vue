@@ -91,6 +91,8 @@ const onSubmit = async () => {
       });
       modalStore.verificationModal = true;
    } catch (error) {
+      console.log("err",error);
+      
       $toast.error(error.response.data.message, { position: "top" });
    }
 }
@@ -115,6 +117,10 @@ const onVerifyOTP = async () => {
    } catch (error) {
       if (error.response.data.message != 'REGISTER') {
          $toast.error(error.response.data.message, { position: "top" });
+      }  else {
+         userStore.registerStep = 1;
+         userStore.registerPhoneNumber = parsedPhoneNumber.value;
+         router.push('/register');
       }
    } finally {
       state.verifyLoading = false;

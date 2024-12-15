@@ -1,16 +1,17 @@
 import { reactive } from 'vue';
 import axios from '../axios';
-import router from '../router';
 
 export const userStore = reactive({
+   registerStep: 0,
+   registerPhoneNumber: "",
    user: null,
    async fetchUser() {
       try {
-         const {data} = await axios.post('/auth/user');
+         const { data } = await axios.post('/auth/user');
          this.user = data.user;
          localStorage.setItem('token', data.token);
       } catch (error) {
-         
+
       }
    },
    logout() {
