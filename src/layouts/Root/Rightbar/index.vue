@@ -1,5 +1,5 @@
 <template>
-   <div class="w-[320px] fixed right-[320px] h-[700px] border-l border-l-dark-800 p-4">
+   <div class="w-[320px] h-[700px] border-l border-l-dark-800 p-4">
       <div class="flex items-center h-12 rounded-full bg-dark-800 px-3 gap-3 mb-12">
          <Icon icon="guidance:search" class="text-white/60 text-xl" />
          <input v-model="state.query" type="text" placeholder="Arayın..."

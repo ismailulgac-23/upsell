@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import { Icon } from '@iconify/vue/dist/iconify.js';
 </script>
 
 <style lang="scss" scoped></style>

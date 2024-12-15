@@ -1,13 +1,17 @@
 <template>
    <div
-      class="w-[280px] h-[700px] fixed left-[280px] border-r border-r-dark-800 py-6 px-4 flex flex-col items-start justify-between">
-      <div class="flex flex-col items-start">
-         <router-link to="/">
-            <img src="/logo.png" class="mb-14 w-[160px] h-[32px] object-cover" />
-         </router-link>
+      class="flex-shrink-0 w-[280px] h-[700px] border-r border-r-dark-800 py-6 px-4 flex flex-col items-start justify-between">
+      <div class="flex flex-col items-start w-full">
+         <div class="flex items-center justify-between w-full mb-14">
+            <router-link to="/">
+               <img src="/logo.png" class="w-[160px] h-[32px] object-cover" />
+            </router-link>
+            <Icon icon="mdi:close" class="text-3xl" @click="modalStore.sidebarModal = false" v-if="isMobile" />
+         </div>
 
          <div class="flex flex-col items-start gap-10">
-            <component :is="link.to ? 'router-link' : 'button'" @click="link.onClick" :to="link.to" v-for="(link, index) in links" :key="index" class="flex items-center gap-3">
+            <component :is="link.to ? 'router-link' : 'button'" @click="link.onClick" :to="link.to"
+               v-for="(link, index) in links" :key="index" class="flex items-center gap-3">
                <Icon :icon="link.icon" class="text-3xl" />
                <h1>{{ link.title }}</h1>
             </component>
@@ -39,6 +43,9 @@
 import { Icon } from '@iconify/vue/dist/iconify.js';
 import { userStore } from '../../store/user';
 import Avatar from '../../components/common/Avatar.vue';
+import { modalStore } from '../../store/modal';
+
+defineProps(['isMobile'])
 
 const links = [
    { title: "Ana Sayfa", icon: "hugeicons:home-01", to: "/" },
