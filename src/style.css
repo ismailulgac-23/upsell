@@ -5,7 +5,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  @apply bg-dark-900 text-white;
+  @apply bg-white;
 }
 
 .btn-primary {

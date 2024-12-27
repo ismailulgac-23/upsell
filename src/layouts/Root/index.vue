@@ -1,40 +1,22 @@
 <template>
-   <div v-if="!loading" class="w-full flex items-start md:container md:mx-auto">
-      <Sidebar class="hidden md:flex" />
-      <div class="overflow-y-auto h-full no-scrollbar w-full md:w-[calc(100% - 600px)]">
-         <Nav @onClickMenu="handleClickMenu" />
+   <div class="flex gap-4 h-screen w-screen overflow-hidden">
+      <div class="sidebar w-[280px] h-screen">
+         <Sidebar />
+      </div>
+      <div class="h-full overscroll-y-auto overflow-x-hidden" style="width: calc(100% - 280px);">
          <router-view></router-view>
       </div>
-      <Rightbar class="flex-shrink-0 hidden md:block" />
    </div>
-   <div v-else class="w-screen h-screen flex items-center justify-center overflow-hidden">
-      <h1 class="text-4xl font-medium">Hoşgeldiniz</h1>
-   </div>
-
-   <Modal v-if="modalStore.sidebarModal">
-      <Sidebar class="w-full h-full bg-dark-800" :isMobile="true" />
-   </Modal>
 </template>
 
 <script setup>
-
-import { onMounted, ref } from 'vue';
-import Nav from './Nav.vue';
-import Sidebar from './Sidebar.vue';
-import Rightbar from './Rightbar/index.vue';
-import Modal from '../../components/modal/index.vue';
-import { modalStore } from '../../store/modal';
-
-const loading = ref(true);
-
-const handleClickMenu = () => {
-   modalStore.sidebarModal = true;
-}
-
-onMounted(async () => {
-   loading.value = false;
-});
-
+import Sidebar from "./Sidebar.vue";
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.sidebar {
+   box-shadow: 0px 0px 12px 0px #F3F4F6;
+   border: 1px solid #F3F4F6;
+}
+
+</style>

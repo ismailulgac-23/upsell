@@ -1,12 +1,5 @@
 import { API_URL } from "./axios"
 
-export const socialLinks = {
-   "logos:instagram-icon": "Instagram",
-   "logos:linkedin-icon": "Linkedin",
-   "lets-icons:e-mail": "Mail",
-   "logos:facebook": "Facebook",
-   "pajamas:twitter": "Twitter"
-}
 
 export const getImage = (folder, src) => `${API_URL}/uploads/${folder}/${src}`;
 export const formatDate = (dateString) => {

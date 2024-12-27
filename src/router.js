@@ -1,46 +1,29 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
+import LoginView from './views/LoginView.vue';
+import DashboardView from './views/DashboardView.vue';
+import SubscriptionsView from './views/SubscriptionsView.vue';
+import UsersView from './views/UsersView.vue';
+
 import RootLayout from "./layouts/Root/index.vue"
-import HomeView from "./features/user/HomeView.vue"
-import LiveView from './features/user/LiveView.vue';
-import LiveDetailView from './features/user/LiveDetailView.vue';
-import LoginView from './features/user/LoginView.vue';
-import { userStore } from './store/user';
-import ProfileView from './features/user/ProfileView.vue';
-import RegisterView from './features/user/RegisterView.vue';
 
 const router = createRouter({
    history: createWebHistory(import.meta.env.BASE_URL),
    routes: [
       {
          path: '/',
-         name: 'user',
+         name: 'root',
          component: RootLayout,
          children: [
-            { path: "", component: HomeView },
-            { path: "user/:id", component: ProfileView },
-            {
-               path: "live",
-               children: [
-                  { path: "", component: LiveView },
-               ]
-            },
+            { path: "", component: DashboardView },
+            { path: "users", component: UsersView },
+            { path: "subscriptions", component: SubscriptionsView },
          ]
       },
       {
          path: '/login',
          component: LoginView,
          name: 'login',
-      },
-      {
-         path: '/register',
-         component: RegisterView,
-         name: 'register',
-      },
-      {
-         path: '/live/:id',
-         component: LiveDetailView,
-         name: 'live-detail',
       },
    ],
    scrollBehavior(to, from, savedPosition) {
@@ -52,7 +35,7 @@ const router = createRouter({
    },
 });
 
-router.beforeEach(async (to, from, next) => {
+/* router.beforeEach(async (to, from, next) => {
    try {
       if (!userStore.user) {
          await userStore.fetchUser();
@@ -75,7 +58,7 @@ router.beforeEach(async (to, from, next) => {
       console.error("User fetch failed:", error);
       next('/login');
    }
-});
+}); */
 
 
 
